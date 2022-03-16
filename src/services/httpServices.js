@@ -13,9 +13,9 @@ axios.interceptors.response.use(null, error => {
   const expectedErrors = error.response && error.response.status>=400 && error.response.status<500;
   
   if(expectedErrors){
-    console.log(error.response);
+    console.log("axios interceptot",error.response.status,error.response.data.error );
     console.log(error.message);
-    toast.error('error');
+    toast.error(error.response.data.error );
   }
   return Promise.reject(error);
 });
