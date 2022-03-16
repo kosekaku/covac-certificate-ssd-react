@@ -36,6 +36,11 @@ const Header = () => {
                 Printing guides
               </a>
             </li>
+            <li className="nav-item mr-auto" style={{alignText: ""}}>
+              <a className="nav-link" href="/logout">
+                Log out
+              </a>
+            </li>
           </ul>
         </div>
       </nav>

@@ -4,6 +4,7 @@ import { CertificateBio } from './certificateBio';
 import { useNavigate, useLocation } from 'react-router';
 import { useReactToPrint } from 'react-to-print';
 import './main.css';
+import { postPrints } from '../../services/certificateService';
 
 // Using a functional component, you must wrap it in React.forwardRef, and then forward the ref to
 // the node you want to be the root of the print (usually the outer most node in the ComponentToPrint)
@@ -16,8 +17,42 @@ export const ComponentToPrint = React.forwardRef((props, ref,) => {
   const state = printData.data;
   const {teiId} = printData;
 
+  // send to server to track printed cert
+  const printsTracking = async () => {
+    let firstName,
+    lastName,
+    otherName,
+    dateOfBirth,
+    uuid,
+    occupation,
+    address;
+  state.attributes.map((person, index) => {
+    if (person.attribute === 'sB1IHYu2xQT') return (firstName = person.value);
+    if (person.attribute === 'ENRjVGxVL6l') return (lastName = person.value);
+    if (person.attribute === 'NfbmVFsS80D') return (otherName = person.value);
+    if (person.attribute === 'NI0QRzJvQ0k') return (dateOfBirth = person.value);
+    if (person.attribute === 'KSr2yTdu1AI') return (uuid = person.value);
+    if (person.attribute === 'LY2bDXpNvS7') return (occupation = person.value);
+    if (person.attribute === 'Xhdn49gUd52') return (address = person.value);
+  });
+  const checkUndefined = (data)=> data!== undefined ? data:'';
+  const data ={
+    uniqueId: checkUndefined(uuid), 
+    fullName: `${checkUndefined(firstName) } ${checkUndefined(lastName)} ${checkUndefined(otherName)}`,
+    occupation: checkUndefined(occupation),
+    dob: checkUndefined(dateOfBirth), 
+    address: checkUndefined(address)
+  }
+    
+    // send data to server
+    await postPrints(data);
+      //console.log('server response',response);
+  }
+
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
+    documentTitle: `vaccine-certificate-${teiId}}`,
+    onAfterPrint: printsTracking,
   });
   return (
     <div >
