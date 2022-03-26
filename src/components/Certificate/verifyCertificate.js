@@ -1,40 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import verifyCertificateService from '../../services/verifyCertificateService';
 import { CertificateHeader } from './certificateHeader';
 import { CertificateBio } from './certificateBio';
-import NotFoundPage from '../notFoundPage';
+import NotFoundPage from '../notFoundPages/notFoundPage';
+import LoadingIndicator from '../Helpers/loadingIndicator';
+import verifyCertificateService from '../../services/verifyCertificateService';
 import 'react-toastify/dist/ReactToastify.css';
 
 const VerifyCertificate = () => {
   const [teiData, setTEIData] = useState([]);
   const [id, setId] = useState([]);
-  const [apiErrors, setApiErrors] = useState(null);
-  const [apiStatusCode, setApiStatusCode] = useState();
   const [loadingData, setLoadingData] = useState(true);
   const [searchParams] = useSearchParams();
-
-  // TODO add a request interceptor
-  // response interceptor
-  axios.interceptors.response.use(
-    function (response) {
-      // Any status code that lie within the range of 2xx cause this function to trigger
-      toast('Success! Certificate verified', {
-        toastId: 'success1',
-      });
-      return response;
-    },
-    function (error) {
-      // Any status codes that falls outside the range of 2xx cause this function to trigger
-      const { status } = error.response;
-      const { message } = error;
-      setApiErrors(message);
-      setApiStatusCode(status);
-      return Promise.reject(error);
-    }
-  );
 
   // hook for api services
   useEffect(() => {
@@ -43,22 +21,21 @@ const VerifyCertificate = () => {
     const getApiData = async () => {
       setLoadingData(true);
       const data = await verifyCertificateService(idParam); // returns an object
-      setLoadingData(false);
-      if (data !== null) return setTEIData(data); //aded conditional return 04/03/2022
-      setApiStatusCode(404);
+      if (data !== undefined){
+        setLoadingData(false);
+        toast.success('Certificate Successfully Verified');
+        return setTEIData(data);
+      } else{
+        setLoadingData(false);
+        toast.error('Certificate can not be verified');
+      }
     };
     getApiData();
-    toast('loadin and verifying Cerificate .......', {
-      toastId: '1',
-    });
+    
   }, [searchParams]);
   return (
     <>
-      {(apiErrors !== null || teiData.length === 0) && (
-        <>
-          <NotFoundPage statusCode={apiStatusCode} />
-        </>
-      )}
+    {loadingData && <LoadingIndicator message="Searching and Verifying Certificate"/>}
       {!loadingData && teiData.length !== 0 && (
         <div className="black-border">
           <div className="white-border">
@@ -100,9 +77,14 @@ const VerifyCertificate = () => {
           </div>
         </div>
       )}
+      {(!loadingData && teiData.length===0 ) && (
+        <>
+          <NotFoundPage statusCode={404} />
+        </>
+      )}
       <ToastContainer
         position="top-center"
-        autoClose={1000}
+        autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

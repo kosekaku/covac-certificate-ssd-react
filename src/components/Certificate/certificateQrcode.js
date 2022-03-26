@@ -1,11 +1,10 @@
 import React from 'react';
 import QRCode from 'qrcode.react';
-
+import { verifyCertURL } from '../constants/apiURL';
 export const CertificateQrcode = ({state}) => {
   const {firstName, lastName, otherName,gender, dateOfBirth, age, uuid,phone,
     vaccineName, batchNumber, doseAdministered, dateofVaccination, placeOfVaccination, teiId} = state;
-  const url = `http://localhost:3000/print/verify?id=${teiId}`;
-  // helper to check for undefined
+  const url = verifyCertURL(window.location.origin, teiId);
   const checkUndefined = (data) => data? data: '';
   return (
     <div className="row">
@@ -37,6 +36,12 @@ export const CertificateQrcode = ({state}) => {
         }}
         />
       </div>
+      <div className="text-center">
+        <p >
+        This document is system generated and therefore does not require a signature.
+        </p>
+        <p>You may confirm this certificate by scanning the QR code.</p>
+</div>
     </div>
   );
 };
