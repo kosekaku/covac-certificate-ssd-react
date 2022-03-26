@@ -12,27 +12,27 @@ const PrintingGuide = () => {
       </div>
       <div className="card-body " >
         <h6 className="card-title d-flex justify-content-center align-content-center">
-          We are glad you have gotten your vaccination, and we would like to
+          The Ministry of Health is glad that you have gotten your vaccination, and we would like to
           guide you to print your proof of vaccination certificate....
         </h6>
         <ol className="card-text  list-group list-group-numbered">
           <li className="list-group-item">
-            Enter the correct facility where you got vaccinated
+            Enter the correct vaccination unique number EX.<strong>CES_JUB_JTH_000016641/21</strong> 
+            You can find the number on your vaccine card
           </li>
           <li className="list-group-item ">
-            Select the date of vaccination
+        
+            Enter your valid mobile phone number you used during the vaccination, 
+            Phone must not start with <strong>0</strong>, Ex. if your number is 0921000000,
+            then enter <strong>921000000</strong>
           </li>
           <li className="list-group-item ">
-            Enter the correct mobile phone number you used during the
-            vaccination, enter the phone number without the leading 0 ie if
-            number is 0920000000, enter as 920000000
-          </li>
-          <li className="list-group-item">
-            Click the generate certificate button, to prepare your certificate
+              If you used <strong>Non-South Sudanese mobile network numbers</strong>, then Select
+              your country code and enter your phone number without starting with zero
           </li>
           <li className="list-group-item ">
-            Search your certificate using your unique identification number or
-            firstname
+            Click on the search button to find your certificate, if your certificate is available,
+            you should be able to see your name and other details, then click to view certificate  
           </li>
         </ol>
 

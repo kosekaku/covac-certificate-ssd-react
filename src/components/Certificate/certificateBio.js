@@ -4,7 +4,6 @@ import { CertificateQrcode } from './certificateQrcode';
 
 export const CertificateBio = ({ state, teiId }) => {
   const events = state.enrollments; // get events on enrollment entity
-  
   // entity attributes
   let firstName,
     lastName,
@@ -77,12 +76,8 @@ export const CertificateBio = ({ state, teiId }) => {
                       return (batchNumber = element.value); // batch number
                     if (element.dataElement === 'LUIsbsm3okG')
                       return (doseAdministered = element.value); // dose adminstered
-                    //if(element.dataElement==='bbnyNYD1wgS') return vaccineName = element.value; // dateofVaccination
-                    // return ''
                   });
-                  //console.log(doseAdministered);
-                  // TODO don't astrazenca with only one dose. get only those with full dose
-                  //if(vaccineName==='astrazeneca' && (doseAdministered==='DOSE1' && doseAdministered==='DOSE2'))
+            
                   return (
                     <TableRow key={index}>
                       <TableCell className="vaccine-card-dose-table-value">
@@ -110,6 +105,7 @@ export const CertificateBio = ({ state, teiId }) => {
         </div>
       </div>
       <CertificateQrcode
+      
         state={{
           firstName,
           lastName,

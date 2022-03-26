@@ -30,13 +30,7 @@ ReactDOM.render(
           name="VerifyCerti"
           element={<VerifyCertificate />}
         />
-        {/* <Route exact path="/prints" name="Dashboard" element={<MoniterDashboard/>}/>  */}
-        <Route
-          exact
-          path="/logout"
-          name="Home"
-          element={<MoniterDashboard />}
-        />
+      
         <Route exact path="/login" name="Login" element={<Login />} />
         <Route
           exact

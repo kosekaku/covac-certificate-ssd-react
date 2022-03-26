@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Navbar, Container, Nav, Brand, Link } from 'reactstrap';
-
+import { useNavigate } from 'react-router-dom';
 const Header = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    sessionStorage.setItem('token',null );
+   return  navigate('/');
+  };
   return (
     <React.Fragment>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -36,8 +40,8 @@ const Header = () => {
                 Printing guides
               </a>
             </li>
-            <li className="nav-item mr-auto" style={{alignText: ""}}>
-              <a className="nav-link" href="/logout">
+            <li onClick={handleLogout} className="nav-item mr-auto" style={{alignText: ""}}>
+              <a className="nav-link" href="/">
                 Log out
               </a>
             </li>

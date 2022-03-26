@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button} from '@dhis2/ui'
 
-const LoadingIndicator = () => {
+const LoadingIndicator = ({message}) => {
   return (
     <div className="d-flex justify-content-center align-items-center"  style={{height: "100vh"}}>
       <Button
@@ -26,7 +26,7 @@ const LoadingIndicator = () => {
 
     
   >
-    Loading...
+    {message}
   </Button>
 
     </div>
