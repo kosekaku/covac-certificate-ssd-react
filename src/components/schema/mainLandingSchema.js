@@ -3,9 +3,9 @@ import Joi from 'joi-browser';
 // Validation schema
 const schemaName = {
   uniqueId: Joi.string().min(5).required().label('Unique vaccination Id'),
-  phone: Joi.string().max(12).label('Phone number').error(() => {
+  phone: Joi.string().min(9).max(12).label('Phone number').error(() => {
     return {
-      message: 'Phone number must be 9 values',
+      message: 'Phone number must be 9 values Ex. 928111111',
     };
   }),
 
