@@ -2,8 +2,8 @@ import Joi from 'joi-browser';
 
 // Validation schema
 const schemaName = {
-  uniqueId: Joi.string().min(5).required().label('Unique vaccination Id'),
-  phone: Joi.string().min(9).max(12).label('Phone number').error(() => {
+  uniqueId: Joi.string().min(5).label('Unique vaccination Id'),
+  phone: Joi.string().min(12).max(12).label('Phone number').error(() => {
     return {
       message: 'Phone number must be 9 values Ex. 928111111',
     };
@@ -22,14 +22,26 @@ const validateProperty = ({ name, value }) => {
 // before submission
 const validateSchema = (uniqueId,phoneNumber
   ) => {
-  const data1 = {
+  // const data1 = {
+  //   uniqueId: uniqueId,
+  //   phone: phoneNumber,
+  // };
+  const dataId = {
     uniqueId: uniqueId,
+  };
+  const dataPhone = {
     phone: phoneNumber,
   };
-
   const errors = {};
   const options = { abortEarly: false };
-  const { error } = Joi.validate(data1, schemaName, options);
+  let errorValidation;
+  if(uniqueId !==''){
+    errorValidation = Joi.validate(dataId, schemaName, options);
+
+  } else {
+    errorValidation = Joi.validate(dataPhone, schemaName, options);
+  } 
+  const {error} = errorValidation;
   if (!error) return null;
   for (let item of error.details) {
     errors[item.path[0]] = item.message;

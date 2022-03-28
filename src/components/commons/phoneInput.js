@@ -4,12 +4,17 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 
 const PhoneInputBox = ({ name, label, error, ...rest }) => {
+  let styles={
+    background: 'red',
+    color: 'blue',
+    align: 'center'
+  }
   return (
-    <div className="form-group row mb-2">
+    <div className="form-group row mb-2 ">
       <label htmlFor={name} className="col-sm-2 col-form-label">
         {label}
       </label>
-      <div className="col-sm-10">
+      <div className="col-sm-10 ">
         <PhoneInput
           {...rest}
           country={'ss'}
@@ -22,6 +27,7 @@ const PhoneInputBox = ({ name, label, error, ...rest }) => {
             autoFocus: false,
             
           }}
+          inputClass='w-100'
 
           // isValid={(value, country) => {
             
