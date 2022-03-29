@@ -1,15 +1,16 @@
-const teiURL = 'http://localhost:8000/api/v1/teis';
-const postPrintsURL = 'http://localhost:8000/api/v1/teis/prints';
+const host = process.env.REACT_APP_HOST
+const teiURL = `${host}/api/v1/teis`;
+const postPrintsURL = `${host}/api/v1/teis/prints`;
 const verifyCertURLAPI = (id) =>
-  `http://localhost:8000/api/v1/teis/verify/${id}`;
+  `${host}/api/v1/teis/verify/${id}`;
 
 //QRCODE
 const verifyCertURL = (urlOrgin, teiId) =>
   `${urlOrgin}/print/verify?id=${teiId}`;
 
 // monitor
-const printsURL = 'http://localhost:8000/api/v1/teis/prints';
-const loginURL = 'http://localhost:8000/api/v1/login';
+const printsURL = `${host}/api/v1/teis/prints`;
+const loginURL = `${host}/api/v1/login`;
 
 export {
   teiURL,

@@ -67,16 +67,18 @@ export const CertificateBio = ({ state, teiId }) => {
               </TableHead>
               <TableBody>
                 {events.map((entity, index) => {
-                  entity.dataValues.map((element, index) => {
-                    dateofVaccination = entity.eventDate.slice(0,10);
-                    placeOfVaccination = entity.orgUnitName;
-                    if (element.dataElement === 'bbnyNYD1wgS')
-                      return (vaccineName = element.value); // vaccine type
-                    if (element.dataElement === 'Yp1F4txx8tm')
-                      return (batchNumber = element.value); // batch number
-                    if (element.dataElement === 'LUIsbsm3okG')
-                      return (doseAdministered = element.value); // dose adminstered
-                  });
+                  if(entity !==null) {
+                    entity.dataValues.map((element, index) => {
+                      dateofVaccination = entity.eventDate.slice(0,10);
+                      placeOfVaccination = entity.orgUnitName;
+                      if (element.dataElement === 'bbnyNYD1wgS')
+                        return (vaccineName = element.value); // vaccine type
+                      if (element.dataElement === 'Yp1F4txx8tm')
+                        return (batchNumber = element.value); // batch number
+                      if (element.dataElement === 'LUIsbsm3okG')
+                        return (doseAdministered = element.value); // dose adminstered
+                    });
+                
             
                   return (
                     <TableRow key={index}>
@@ -97,6 +99,7 @@ export const CertificateBio = ({ state, teiId }) => {
                       </TableCell>
                     </TableRow>
                   );
+                }else{} // no events
                 })}
               </TableBody>
             

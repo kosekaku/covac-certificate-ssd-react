@@ -34,8 +34,9 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "heroku-prebuild": "yarn add global serve",
     "build": "react-scripts build",
+    "start": "serve -s build",
     "test": "react-scripts test"
   },
   "eslintConfig": {
