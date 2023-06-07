@@ -1,15 +1,15 @@
-const teiURL = 'https://api-covac-ssd.glitch.me/api/v1/teis';
-const postPrintsURL = 'https://api-covac-ssd.glitch.me/api/v1/teis/prints';
-const verifyCertURLAPI = (id) =>
-  `https://api-covac-ssd.glitch.me/api/v1/teis/verify/${id}`;
+const host = process.env.REACT_APP_HOST;
+const teiURL = `${host}/api/v1/teis`;
+const postPrintsURL = `${host}/api/v1/teis/prints`;
+const verifyCertURLAPI = (id) => `${host}/api/v1/teis/verify/${id}`;
 
 //QRCODE
 const verifyCertURL = (urlOrgin, teiId) =>
   `${urlOrgin}/print/verify?id=${teiId}`;
 
 // monitor
-const printsURL = 'https://api-covac-ssd.glitch.me/api/v1/teis/prints';
-const loginURL = 'https://api-covac-ssd.glitch.me/api/v1/login';
+const printsURL = `${host}/api/v1/teis/prints`;
+const loginURL = `${host}/api/v1/login`;
 
 export {
   teiURL,
