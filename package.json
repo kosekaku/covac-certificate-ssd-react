@@ -37,6 +37,7 @@
     "heroku-prebuild": "yarn add global serve",
     "build": "react-scripts build",
     "start": "serve -s build",
+    "dev": "react-scripts start",
     "test": "react-scripts test"
   },
   "eslintConfig": {
